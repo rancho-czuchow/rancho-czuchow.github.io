@@ -201,8 +201,7 @@ body {
     box-sizing: border-box;
     overflow-x: hidden;
     overflow-y: auto;
-    display:relative;
-    font-size: max(1vw, 1vh);
+    font-size: clamp(1rem, 2vw, 1.5rem);
     font-family: Lato;
     color: var(--text-color-2);
 }
