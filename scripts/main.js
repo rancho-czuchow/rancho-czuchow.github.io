@@ -1,3 +1,14 @@
+function getCookie(name) {
+    const cookie = document.cookie
+        .split("; ")
+        .find(cookie => cookie.startsWith(`${name}=`));
+
+    return cookie ? decodeURIComponent(cookie.slice(name.length + 1)) : null;
+}
+
+function setCookie(name, value, maxAge) {
+    document.cookie = `${name}=${encodeURIComponent(value)}; path=/; max-age=${maxAge}; SameSite=Lax`;
+}
 let themeURLS = {
     light: "/styles/themes/light.css",
     dark: "/styles/themes/dark.css",
@@ -7,17 +18,12 @@ let selectedTheme = null;
 async function setTheme() {
     let themeStyleSheet = document.querySelector(".theme-style-sheet");
     if (selectedTheme) {
-        await cookieStore.set({
-            name: "theme",
-            value: selectedTheme,
-            path: "/",
-            expires: Date.now() + 30758400000,
-        });
+        setCookie("theme", selectedTheme, 307584000);
     } else {
         selectedTheme = "dark";
-        let savedTheme = await cookieStore.get("theme");
+        let savedTheme = getCookie("theme");
         if (savedTheme) {
-            selectedTheme = savedTheme.value;
+            selectedTheme = savedTheme;
         } else {
             if (window.matchMedia("(prefers-color-scheme: light)").matches) {
                 selectedTheme = "light";
@@ -60,7 +66,7 @@ if (mainBackground) {
             let loadedList = new Array();
             if (imageList) {
                 let imageLoader = new Image();
-                for (imageName of imageList) {
+                for (const imageName of imageList) {
                     let loadSuccessfull = true;
                     let path = IMAGE_PATH_PREFIX + imageName;
                     imageLoader.src = path;
