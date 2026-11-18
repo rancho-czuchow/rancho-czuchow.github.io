@@ -10,6 +10,7 @@
     --text-color-3: hsl(0, 0%, 70%);
     --shadow-color-1: hsla(0, 0%, 0%, 0);
     --home-icon: url("/images/icons/dark-home.svg");
+    --offers-icon: url("/images/icons/dark-offers.svg");
     --parties-icon: url("/images/icons/dark-parties.svg");
     --place-icon: url("/images/icons/dark-place.svg");
     --about-us-icon: url("/images/icons/dark-about-us.svg");

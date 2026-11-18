@@ -81,8 +81,9 @@ body {
 }
 .main-header {
     height: 20%;
-    width: fit-content;
+    width: 100%;
     box-sizing: border-box;
+    background-color: var(--main-color-1);
 }
 .main-header .logo-section {
     height: 100%;
@@ -163,6 +164,9 @@ body {
 }
 .main-nav .nav-link div.home::before {
     background-image: var(--home-icon);
+}
+.main-nav .nav-link div.offers::before {
+    background-image: var(--offers-icon);
 }
 .main-nav .nav-link div.parties::before {
     background-image: var(--parties-icon);
@@ -253,10 +257,8 @@ body {
     .main-sidebar {
         width: 100%;
         height: fit-content;
-        flex: 0 0 auto;
     }
     .main-header {
-        margin: auto;
         height: 300px;
     }
     .main-header .logo-section {
