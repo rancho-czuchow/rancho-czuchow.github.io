@@ -1,0 +1,19 @@
+:root {
+    --main-color-1: hsl(0, 0%, 90%);;
+    --main-color-2: hsl(0, 0%, 80%);
+    --main-color-3: hsl(0, 0%, 70%);
+    --main-transparent-color-1: hsla(0, 0%, 90%, 0.7);
+    --main-transparent-color-2: hsla(0, 0%, 80%, 0.7);
+    --main-transparent-color-3: hsla(0, 0%, 70%, 0.7);
+    --text-color-1: hsl(0, 0%, 12%);
+    --text-color-2: hsl(0, 0%, 18%);
+    --text-color-3: hsl(0, 0%, 25%);
+    --shadow-color-1: hsla(0, 0%, 0%, 0.5);
+    --home-icon: url("/images/icons/light-home.svg");
+    --parties-icon: url("/images/icons/light-parties.svg");
+    --place-icon: url("/images/icons/light-place.svg");
+    --about-us-icon: url("/images/icons/light-about-us.svg");
+    --gallery-icon: url("/images/icons/light-gallery.svg");
+    --contact-icon: url("/images/icons/light-contact.svg");
+    --selected-theme-icon: url("/images/icons/light-theme.svg");
+}
