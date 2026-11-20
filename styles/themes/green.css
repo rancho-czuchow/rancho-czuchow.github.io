@@ -1,0 +1,20 @@
+:root {
+    --main-color-1: hsl(90, 25%, 28%);
+    --main-color-2: hsl(90, 25%, 34%);
+    --main-color-3: hsl(90, 25%, 41%);
+    --main-transparent-color-1: hsla(90, 26%, 28%, 0.7);
+    --main-transparent-color-2: hsla(90, 25%, 34%, 0.7);
+    --main-transparent-color-3: hsla(90, 30%, 41%, 0.7);
+    --text-color-1: hsl(0, 0%, 90%);
+    --text-color-2: hsl(0, 0%, 80%);
+    --text-color-3: hsl(0, 0%, 70%);
+    --shadow-color-1: hsla(0, 0%, 0%, 0.5);
+    --home-icon: url("/images/icons/dark-home.svg");
+    --offers-icon: url("/images/icons/dark-offers.svg");
+    --parties-icon: url("/images/icons/dark-parties.svg");
+    --place-icon: url("/images/icons/dark-place.svg");
+    --about-us-icon: url("/images/icons/dark-about-us.svg");
+    --gallery-icon: url("/images/icons/dark-gallery.svg");
+    --contact-icon: url("/images/icons/dark-contact.svg");
+    --selected-theme-icon: url("/images/icons/green-theme.svg");
+}

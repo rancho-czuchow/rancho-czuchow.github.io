@@ -1,7 +1,7 @@
 function getCookie(name) {
     const cookie = document.cookie
         .split("; ")
-        .find(cookie => cookie.startsWith(`${name}=`));
+        .find((cookie) => cookie.startsWith(`${name}=`));
 
     return cookie ? decodeURIComponent(cookie.slice(name.length + 1)) : null;
 }
@@ -12,8 +12,9 @@ function setCookie(name, value, maxAge) {
 let themeURLS = {
     light: "/styles/themes/light.css",
     dark: "/styles/themes/dark.css",
+    green: "/styles/themes/green.css",
 };
-let themeURLOrder = ["light", "dark"];
+let themeURLOrder = ["light", "dark", "green"];
 let selectedTheme = null;
 async function setTheme() {
     let themeStyleSheet = document.querySelector(".theme-style-sheet");
@@ -47,7 +48,7 @@ mainToolbarThemeButton.addEventListener("click", toggleTheme);
 let mainBackground = document.querySelector(".main-background");
 
 if (mainBackground) {
-    async function startAnimatingBackground() {
+    async function animateMainBackground() {
         const IMAGES_JSON = await fetch("/configs/background-images.json");
         if (!IMAGES_JSON.ok) {
             return;
@@ -61,63 +62,39 @@ if (mainBackground) {
             return;
         }
         const IMAGE_PATH_PREFIX = "/images/gallery/";
-
+        let backgroundImagesCache = [];
         async function loadImages(imageList) {
-            let loadedList = new Array();
-            if (imageList) {
-                let imageLoader = new Image();
-                for (const imageName of imageList) {
-                    let loadSuccessfull = true;
-                    let path = IMAGE_PATH_PREFIX + imageName;
-                    imageLoader.src = path;
-                    try {
-                        await imageLoader.decode();
-                    } catch (error) {
-                        loadSuccessfull = false;
-                    }
-                    if (loadSuccessfull) {
-                        loadedList.push(path);
-                    }
-                }
-            }
-            return loadedList;
+            const promises = imageList.map((imagePath) => {
+                const imageLoader = new Image();
+                backgroundImagesCache.push(imageLoader);
+                return new Promise((resolve) => {
+                    imageLoader.onload = () => resolve(IMAGE_PATH_PREFIX + imagePath);
+                    imageLoader.onerror = () => resolve(null);
+                    imageLoader.src = IMAGE_PATH_PREFIX + imagePath;
+                });
+            });
+
+            const results = await Promise.all(promises);
+
+            return results.filter((imagePath) => imagePath !== null);
         }
 
         let pcImages = await loadImages(IMAGES.pc);
-
         let mobileImages = await loadImages(IMAGES.mobile);
 
+        let background = {
+            pc: null,
+            mobile: null,
+        };
+        let lastBackground = {
+            pc: null,
+            mobile: null,
+        };
         async function changeBackground(animated) {
-            const RANDOM = Math.random();
-            let pcImage = pcImages[Math.floor(RANDOM * pcImages.length)];
-            let mobileImage =
-                mobileImages[Math.floor(RANDOM * mobileImages.length)];
-
-            if (window.matchMedia("(orientation: portrait)").matches) {
-                document.documentElement.style.setProperty(
-                    "--last-main-background",
-                    getComputedStyle(document.documentElement).getPropertyValue(
-                        "--main-background-mobile",
-                    ),
-                );
-            } else {
-                document.documentElement.style.setProperty(
-                    "--last-main-background",
-                    getComputedStyle(document.documentElement).getPropertyValue(
-                        "--main-background-pc",
-                    ),
-                );
-            }
-
-            document.documentElement.style.setProperty(
-                "--main-background-pc",
-                `url("${pcImage}")`,
-            );
-
-            document.documentElement.style.setProperty(
-                "--main-background-mobile",
-                `url("${mobileImage}")`,
-            );
+            mainBackground.style.setProperty("--pc-image", `url("${background.pc}")`);
+            mainBackground.style.setProperty("--mobile-image", `url("${background.mobile}")`);
+            mainBackground.style.setProperty("--last-pc-image", `url("${lastBackground.pc}")`);
+            mainBackground.style.setProperty("--last-mobile-image", `url("${lastBackground.mobile}")`);
             if (animated) {
                 let animationDuration = parseFloat(
                     getComputedStyle(document.documentElement).getPropertyValue(
@@ -133,10 +110,21 @@ if (mainBackground) {
                 });
             }
         }
+
+        function randomizeBackground() {
+            const RANDOM = Math.random();
+            lastBackground = { ...background };
+            background.pc = pcImages[Math.floor(RANDOM * pcImages.length)];
+            background.mobile =
+                mobileImages[Math.floor(RANDOM * mobileImages.length)];
+            
+        }
+        randomizeBackground();
         changeBackground(false);
         setInterval(() => {
+            randomizeBackground();
             changeBackground(true);
         }, IMAGE_CHANGE_COOLDOWN);
     }
-    startAnimatingBackground();
+    animateMainBackground();
 }

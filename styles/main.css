@@ -2,9 +2,6 @@
 
 :root {
     --main-background-animation-duration: 1000ms;
-    --main-background-pc: none;
-    --main-background-mobile: none;
-    --last-main-background: none;
 }
 @keyframes body-animation {
     from {opacity: 1;}
@@ -43,14 +40,12 @@ body {
     background-position: center;
 }
 .main-background .background {
-    background-image: var(--main-background-pc);
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
     z-index: 1;
 }
 .main-background .animation-container {
-    background-image: var(--last-main-background);
     background-size: contain;
     background-repeat: no-repeat;
     position: absolute;
@@ -66,12 +61,14 @@ body {
 }
 .main-background .filler {
     filter: blur(10px);
-    background-image: var(--main-background-pc);
     background-size: contain;
     background-repeat: repeat;
 }
-.main-background .animation-container.filler {
-    background-image: var(--last-main-background);
+.main-background .background, .main-background .filler {
+    background-image: var(--pc-image);
+}
+.main-background .animation-container {
+    background-image: var(--last-pc-image);
 }
 .main-sidebar {
     width: fit-content;
@@ -251,12 +248,13 @@ body {
         position: fixed;
         top: 20%;
     }
-    .main-background .background {
-        background-image: var(--main-background-mobile);
+    .main-background .background, .main-background .filler {
+        background-image: var(--mobile-image);
     }
-    .main-background .filler:not(.animation-container) {
-        background-image: var(--main-background-mobile);
+    .main-background .animation-container {
+        background-image: var(--last-mobile-image);
     }
+
     .main-sidebar {
         width: 100%;
         height: fit-content;

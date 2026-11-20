@@ -10,6 +10,7 @@
    inkscape:export-filename="dark-theme.svg"
    inkscape:export-xdpi="96"
    inkscape:export-ydpi="96"
+   sodipodi:docname="dark-theme.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -36,7 +37,7 @@
   <defs
      id="defs1" />
   <path
-     id="ellipse16"
-     style="display:inline;fill:#ffffff;fill-opacity:0;stroke:#ffffff;stroke-width:10;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
-     d="M 108.72608,28.000001 A 72,72 0 0 0 36.725826,100.00026 72,72 0 0 0 108.72608,172 a 72,72 0 0 0 54.54809,-25.23464 50,50 0 0 1 -32.5484,-46.7651 50,50 0 0 1 32.5484,-46.765107 72,72 0 0 0 -54.54809,-25.235152 z" />
+     id="path1"
+     style="fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:11.7413;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+     d="m 111.69885,30.247618 a 69.752386,69.752386 0 0 0 -69.75269,69.752692 69.752386,69.752386 0 0 0 69.75269,69.75207 69.752386,69.752386 0 0 0 46.35577,-17.82815 52.314303,52.314303 0 0 1 -46.35577,-51.92392 52.314303,52.314303 0 0 1 46.35577,-51.923924 69.752386,69.752386 0 0 0 -46.35577,-17.828768 z" />
 </svg>
