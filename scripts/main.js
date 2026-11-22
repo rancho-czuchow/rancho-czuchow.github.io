@@ -158,7 +158,11 @@ function imageViewing() {
     viewingBox.classList.add("image-viewing");
     document.body.appendChild(viewingBox);
     let imageView = document.createElement("img");
-    viewingBox.appendChild(imageView)
+    viewingBox.appendChild(imageView);
+    let hideButton = document.createElement("button");
+    hideButton.classList.add("hide");
+    hideButton.innerText = "×";
+    viewingBox.appendChild(hideButton);
     function stopViewing() {
         viewingBox.classList.remove("viewing");
         imageView.src = "";
@@ -171,10 +175,17 @@ function imageViewing() {
         if (event.target == event.currentTarget)
         stopViewing();
     });
+    viewingBox.querySelectorAll("button.hide").forEach(button => {
+        button.addEventListener("click", (event) => {
+            if (event.target == event.currentTarget) {
+                stopViewing();
+            }
+        })
+    });
     document.querySelectorAll("img.viewable").forEach((image) => {
         image.addEventListener("click", () => {
             view(image);
-        })
+        });
     });
 }
 imageViewing();

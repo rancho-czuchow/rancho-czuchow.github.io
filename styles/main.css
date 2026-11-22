@@ -297,6 +297,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     height: 100%;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.7);
@@ -312,6 +313,18 @@ body {
     height: 100%;
     width: auto;
     object-fit: contain;
+    cursor: default;
+}
+.image-viewing button.hide {
+    background-color: var(--main-color-3);
+    color: var(--text-color-3);
+    border-radius: 50%;
+    border: 3px solid var(--text-color-3);
+    width: 2em;
+    aspect-ratio: 1/1;
+    font-size: 3em;
+    margin-top: 1em;
+    cursor: pointer;
 }
 img.viewable {
     cursor: pointer;
