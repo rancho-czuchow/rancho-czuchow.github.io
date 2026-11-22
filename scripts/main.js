@@ -97,8 +97,8 @@ if (mainBackground) {
             mainBackground.style.setProperty("--last-mobile-image", `url("${lastBackground.mobile}")`);
             if (animated) {
                 let animationDuration = parseFloat(
-                    getComputedStyle(document.documentElement).getPropertyValue(
-                        "--main-background-animation-duration",
+                    getComputedStyle(mainBackground).getPropertyValue(
+                        "--animation-duration",
                     ),
                 );
                 mainBackground.classList.add("animated");
@@ -128,3 +128,17 @@ if (mainBackground) {
     }
     animateMainBackground();
 }
+function toggleDocumentTopic(topic) {
+    if (topic.classList.contains("hidden")) {
+        topic.classList.remove("hidden");
+    }
+    else {
+        topic.classList.add("hidden");
+    }
+}
+document.querySelectorAll(".topic.collapsible").forEach(topic => {
+    let header = topic.querySelector("h1");
+    header.addEventListener("click", () => {
+        toggleDocumentTopic(topic);
+    });
+});

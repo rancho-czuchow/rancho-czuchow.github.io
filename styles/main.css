@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Huninn&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root {
-    --main-background-animation-duration: 1000ms;
 }
 @keyframes body-animation {
     from {opacity: 1;}
@@ -32,6 +31,7 @@ body {
     overflow: hidden;
     z-index: -1;
     isolation: isolate;
+    --animation-duration: 1000ms;
 }
 .main-background > * {
     position: absolute;
@@ -55,7 +55,7 @@ body {
 .main-background.animated .animation-container {
     display: block;
     animation-name: body-animation;
-    animation-duration: var(--main-background-animation-duration);
+    animation-duration: var(--animation-duration);
     animation-direction: normal;
     animation-fill-mode: forwards;
 }
@@ -202,6 +202,67 @@ body {
     font-family: Lato;
     color: var(--text-color-2);
 }
+.document-section .topic {
+    margin-bottom: 1em;
+}
+.document-section .topic.hidden {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    position: relative;
+}
+.document-section .topic.hidden::before {
+    content: "";
+    position: absolute;
+    bottom: 0%;
+    width: 100%;
+    height: 1px;
+    background-color: var(--text-color-1);
+    z-index: 1;
+}
+.document-section .topic.hidden > * {
+    display: none;
+}
+.document-section .topic.collapsible > h1:first-of-type {
+    padding: 0.1em 0;
+    position: relative;
+    cursor: pointer;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    background-color: var(--main-color-1);
+}
+.document-section .topic.collapsible:not(.hidden) > h1:first-of-type {
+    display: flex;
+    justify-content: space-between;
+    text-indent: 1em;
+}
+.document-section .topic.hidden > h1:first-of-type {
+    display: block;
+    flex: 1;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    text-align: center;
+}
+.document-section .topic.collapsible:not(.hidden) > h1:first-of-type::before {
+    content: "";
+    position: absolute;
+    bottom: 0%;
+    width: 100%;
+    height: 1px;
+    background-color: var(--text-color-1);
+    z-index: 1;
+}
+.document-section .topic.collapsible > h1:first-of-type::after {
+    content: ">";
+    padding: 0 0.3em;
+    box-sizing: border-box;
+    display: block;
+}
+.document-section .topic.hidden > h1:first-of-type::after {
+    content: "v";
+    float: right;
+    width: fit-content;
+}
 .document-section h1 + h2 + h3 + h4 + h5 {
     font-family: Raleway;
 }
@@ -214,9 +275,6 @@ body {
     padding-bottom: 20px;
     text-align: center;
     font-size: 1.5em;
-}
-.document-section .images-section img {
-    float: left;
 }
 .document-section img {
     width: max(200px, 25%);
@@ -294,5 +352,8 @@ body {
         padding: 0;
         border-radius: 0;
         overflow-y: hidden;
+    }
+    .document-section .topic {
+        margin-top: 1em;
     }
 }
