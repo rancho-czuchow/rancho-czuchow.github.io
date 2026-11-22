@@ -167,7 +167,10 @@ function imageViewing() {
         imageView.src = image.src;
         viewingBox.classList.add("viewing");
     }
-    viewingBox.addEventListener("click", stopViewing);
+    viewingBox.addEventListener("click", (event) => {
+        if (event.target == event.currentTarget)
+        stopViewing();
+    });
     document.querySelectorAll("img.viewable").forEach((image) => {
         image.addEventListener("click", () => {
             view(image);
