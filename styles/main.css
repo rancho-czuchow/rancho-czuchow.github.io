@@ -292,6 +292,30 @@ body {
 .document-section a {
     color: var(--text-color-2);
 }
+.image-viewing {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    cursor: pointer;
+    z-index: 1;
+}
+.image-viewing:not(.viewing) {
+    display: none;
+}
+.image-viewing img {
+    max-height: 80%;
+    max-width: 80%;
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+}
+img.viewable {
+    cursor: pointer;
+}
 @media (orientation: portrait) {
     body {
         flex-direction: column;

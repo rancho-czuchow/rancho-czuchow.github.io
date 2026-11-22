@@ -68,7 +68,8 @@ if (mainBackground) {
                 const imageLoader = new Image();
                 backgroundImagesCache.push(imageLoader);
                 return new Promise((resolve) => {
-                    imageLoader.onload = () => resolve(IMAGE_PATH_PREFIX + imagePath);
+                    imageLoader.onload = () =>
+                        resolve(IMAGE_PATH_PREFIX + imagePath);
                     imageLoader.onerror = () => resolve(null);
                     imageLoader.src = IMAGE_PATH_PREFIX + imagePath;
                 });
@@ -91,10 +92,22 @@ if (mainBackground) {
             mobile: null,
         };
         async function changeBackground(animated) {
-            mainBackground.style.setProperty("--pc-image", `url("${background.pc}")`);
-            mainBackground.style.setProperty("--mobile-image", `url("${background.mobile}")`);
-            mainBackground.style.setProperty("--last-pc-image", `url("${lastBackground.pc}")`);
-            mainBackground.style.setProperty("--last-mobile-image", `url("${lastBackground.mobile}")`);
+            mainBackground.style.setProperty(
+                "--pc-image",
+                `url("${background.pc}")`,
+            );
+            mainBackground.style.setProperty(
+                "--mobile-image",
+                `url("${background.mobile}")`,
+            );
+            mainBackground.style.setProperty(
+                "--last-pc-image",
+                `url("${lastBackground.pc}")`,
+            );
+            mainBackground.style.setProperty(
+                "--last-mobile-image",
+                `url("${lastBackground.mobile}")`,
+            );
             if (animated) {
                 let animationDuration = parseFloat(
                     getComputedStyle(mainBackground).getPropertyValue(
@@ -117,7 +130,6 @@ if (mainBackground) {
             background.pc = pcImages[Math.floor(RANDOM * pcImages.length)];
             background.mobile =
                 mobileImages[Math.floor(RANDOM * mobileImages.length)];
-            
         }
         randomizeBackground();
         changeBackground(false);
@@ -131,14 +143,35 @@ if (mainBackground) {
 function toggleDocumentTopic(topic) {
     if (topic.classList.contains("hidden")) {
         topic.classList.remove("hidden");
-    }
-    else {
+    } else {
         topic.classList.add("hidden");
     }
 }
-document.querySelectorAll(".topic.collapsible").forEach(topic => {
+document.querySelectorAll(".topic.collapsible").forEach((topic) => {
     let header = topic.querySelector("h1");
     header.addEventListener("click", () => {
         toggleDocumentTopic(topic);
     });
 });
+function imageViewing() {
+    let viewingBox = document.createElement("div");
+    viewingBox.classList.add("image-viewing");
+    document.body.appendChild(viewingBox);
+    let imageView = document.createElement("img");
+    viewingBox.appendChild(imageView)
+    function stopViewing() {
+        viewingBox.classList.remove("viewing");
+        imageView.src = "";
+    }
+    function view(image) {
+        imageView.src = image.src;
+        viewingBox.classList.add("viewing");
+    }
+    viewingBox.addEventListener("click", stopViewing);
+    document.querySelectorAll("img.viewable").forEach((image) => {
+        image.addEventListener("click", () => {
+            view(image);
+        })
+    });
+}
+imageViewing();
